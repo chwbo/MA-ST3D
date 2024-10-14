@@ -1,7 +1,0 @@
-numpy
-torch>=1.1
-spconv==1.0
-numba
-tensorboardX
-easydict
-pyyaml

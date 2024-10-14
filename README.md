@@ -2,9 +2,7 @@
 
 Code release for the paper **MA-ST3D: Motion Associated Self-Training for Unsupervised Domain Adaptation on 3D Object Detection**, TIP 2024
 
-![framework](./docs/framework.png)
-
-**Authors**: Chi Zhang\*, Wenbo Chen\*,  Wei Wang, Zhaoxiang Zhang (\*equal contribution)
+**Authors**: Chi Zhang, Wenbo Chen,  Wei Wang, Zhaoxiang Zhang 
 
 <!-- [[paper]](https://arxiv.org/abs/2103.05346); -->
 
@@ -51,14 +49,14 @@ Our code is released under the Apache 2.0 license.
 
 We sincerely thank the authors of [ST3D](https://github.com/CVMI-Lab/ST3D) and [OpenPCDet](https://github.com/open-mmlab/OpenPCDet/commit/e3bec15f1052b4827d942398f20f2db1cb681c01) Development Team for open sourcing their methods.
 
-## Citation
+<!-- ## Citation
 
 If you find this project useful in your research, please consider cite:
 ```
-@inproceedings{yang2021st3d,
+@article{zhang2024ma-st3d,
     title={MA-ST3D: Motion Associated Self-Training for Unsupervised Domain Adaptation on 3D Object Detection},
     author={Zhang, chi and Chen, Wenbo and Wang, Wei and Zhang, Zhaoxiang},
-    booktitle={IEEE Transactions on Image Processing},
+    journal={IEEE Transactions on Image Processing},
     year={2024}
 }
-```
+``` -->
