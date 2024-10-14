@@ -1,0 +1,7 @@
+data            tag                  params                                    performance(Car_3d/moderate_R40)
+
+seq00           default          LR 0.001,                                     49.8                                     
+
+all_sequ        all_sequ         LR 0.003
+
+all_sequ        210909_odom_1    LR 0.001, UPDATE_PSEUDO_LABEL_INTERVAL 1

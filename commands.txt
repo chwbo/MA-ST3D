@@ -1,0 +1,142 @@
+for all sequence
+python -m pcdet.datasets.kitti_odom.kitti_odom_dataset create_kitti_odom_infos tools/cfgs/dataset_configs/kitti_odom_dataset.yaml
+
+for mini sequence
+python -m pcdet.datasets.kitti_odom_mini.kitti_odom_mini_dataset create_kitti_odom_infos tools/cfgs/dataset_configs/kitti_odom_mini_dataset.yaml
+
+python train.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 10  --extra_tag for_testing
+
+python train.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --ckpt ../output/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom/210909_odom_1/ckpt/checkpoint_epoch_10.pth --extra_tag 210909_odom_1 --epochs 30
+
+# no trans merge
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50
+python test.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d.yaml --batch_size 4 --eval_all --extra_tag sequ_50
+
+# has trans merge
+export CUDA_VISIBLE_DEVICES=2
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_b0 --ps_filter_enable  --ps_valid_dist 100.0  --ps_decay_factor 0.0  45.46  epoch=1
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_b  --ps_valid_dist inf    --ps_decay_factor 0.0  58.54
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_0  --ps_valid_dist inf    --ps_decay_factor 0.0  58.54
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_1  --ps_valid_dist 30.0   --ps_decay_factor 0.2  51.18  epoch=37
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_2  --ps_valid_dist 60.0   --ps_decay_factor 0.2  49.13  epoch=4
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_3  --ps_valid_dist 100.0  --ps_decay_factor 0.2  49.64  epoch=32
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_4  --ps_valid_dist 100.0  --ps_decay_factor 0.0  45.46  epoch=1
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_5  --ps_valid_dist 100.0  --ps_decay_factor 0.5  52.55  epoch=11
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_6  --ps_valid_dist 30.0   --ps_decay_factor 0.0  49.35  epoch=34
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_7  --ps_valid_dist 30.0   --ps_decay_factor 0.5  52.99  epoch=37
+
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_5_1  --ps_filter_enable --ps_valid_dist 100.0  --ps_decay_factor 0.5  iou_thr [0.6, 0.2]  61.18 epoch=9
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_6_1  --ps_filter_enable --ps_valid_dist 30.0   --ps_decay_factor 0.0  iou_thr [0.6, 0.2]  62.59 epoch=44
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 50 --extra_tag sequ_50_7_1  --ps_filter_enable --ps_valid_dist 30.0   --ps_decay_factor 0.5  iou_thr [0.6, 0.2]  61.58 epoch=8
+
+python test_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --eval_all --extra_tag sequ_50_7
+
+ST3D update 25 Sep.
+
+python train.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d/secondiou_st3d.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --extra_tag ROS_25_SEP
+
+
+for pvrcnn on nuscene->kitti
+python train_odom.py --cfg_file cfgs/da-waymo-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom.yaml --batch_size 4 --pretrained ../pretrained/pvrcnn_ros.pth  --epochs 50 --extra_tag sequ_50_testing  --ps_filter_enable --ps_valid_dist 100.0  --ps_decay_factor 0.0
+
+
+baseline:
+bash scripts/dist_train.sh 4 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d/pvrcnn_st3d.yaml --batch_size 8 --pretrained ../pretrained/pvrcnn_ros.pth  --epochs 50 --extra_tag base_pvrcnn_st --tcp_port 10004
+
+no odom on sequ_50
+bash scripts/dist_train.sh 4 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d.yaml --batch_size 8 --pretrained ../pretrained/pvrcnn_ros.pth  --epochs 30 --extra_tag sequ_50_pvrcnn_no_odom
+
+bash scripts/dist_train_odom.sh 4 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom.yaml --batch_size 8 --pretrained ../pretrained/pvrcnn_ros.pth  --epochs 50 --extra_tag sequ_50_pvrcnn  --ps_filter_enable --ps_valid_dist 100.0  --ps_decay_factor 0.0   58.06 epoch=7
+
+
+
+for waymo
+
+second_iou
+base line
+python train.py --cfg_file cfgs/da-waymo-kitti_models/secondiou_st3d/secondiou_st3d.yaml --batch_size 4 --pretrained ../pretrained/da-waymo-kitti/ros/secondiou/waymo2kitti_ros_secondiou.pth --epochs 30 --extra_tag secondiou_st_ros  map:60.53
+
+odom:
+python train_odom.py --cfg_file cfgs/da-waymo-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 4 --pretrained ../pretrained/da-waymo-kitti/ros/secondiou/waymo2kitti_ros_secondiou.pth --epochs 30 --extra_tag sequ_50_waymo_ros  --ps_filter_enable --ps_valid_dist 100.0  --ps_decay_factor 0.0  epoch=3  map:59.64
+
+odom+st
+python train.py --cfg_file cfgs/da-waymo-kitti_models/secondiou_st3d/secondiou_st3d.yaml --batch_size 4 --pretrained ../output/da-waymo-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom/sequ_50_waymo_ros/ckpt/checkpoint_epoch_3.pth --epochs 30 --extra_tag secondiou_odom_st_ros   epoch=1 map:61.44  SCORE_THRESH: [0.5] lr=0.0015
+
+python train.py --cfg_file cfgs/da-waymo-kitti_models/secondiou_st3d/secondiou_st3d.yaml --batch_size 4 --pretrained ../output/da-waymo-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom/sequ_50_waymo_ros/ckpt/checkpoint_epoch_3.pth --epochs 30 --extra_tag secondiou_odom_st_ros_0  epoch=2 map:60.61    SCORE_THRESH: [0.6]  lr=0.0005
+
+pvrcnn
+base line:
+bash scripts/dist_train.sh 4 --cfg_file cfgs/da-waymo-kitti_models/pvrcnn_st3d/pvrcnn_st3d.yaml --batch_size 8 --pretrained ../pretrained/da-waymo-kitti/ros/pvrcnn/waymo2kitti_ros_pvrcnn.pth --epochs 30 --extra_tag pvrcnn_st_ros --tcp_port 10001   map: 68.96
+
+odom
+bash scripts/dist_train_odom.sh 4 --cfg_file cfgs/da-waymo-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom.yaml --batch_size 8 --pretrained ../pretrained/da-waymo-kitti/ros/pvrcnn/waymo2kitti_ros_pvrcnn.pth --extra_tag sequ_50_ros_pvrcnn  --ps_filter_enable --ps_valid_dist 100.0  --ps_decay_factor 0.0 --tcp_port 10002 : epoch=2 62.27
+
+odom+st
+bash scripts/dist_train.sh 4 --cfg_file cfgs/da-waymo-kitti_models/pvrcnn_st3d/pvrcnn_st3d.yaml --batch_size 8 --pretrained ../output/da-waymo-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom/sequ_50_ros_pvrcnn/ckpt/checkpoint_epoch_2.pth --extra_tag sequ_50_ros_odom_st --tcp_port 10002  epoch=3 63.4
+
+
+for all_episode
+
+for nuscences
+
+secondiou:
+
+odom:
+bash scripts/dist_train_odom.sh 8 --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 32 --pretrained ../../ST3D/ckpt/ROS.pth --epochs 30 --extra_tag sequ_all_6_1  --ps_filter_enable --ps_valid_dist 30.0   --ps_decay_factor 0.0 --tcp_port 10002   epoch=12  69.3
+odom+st
+python train.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d/secondiou_st3d.yaml --batch_size 4 --pretrained ../output/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom/sequ_all_6_1/ckpt/checkpoint_epoch_12.pth --epochs 30 --extra_tag sequ_all_odom_st_ros  71.59  lr=0.0015 SCORE_THRESH: [0.5]
+python train.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d/secondiou_odom_st3d.yaml --batch_size 4 --pretrained ../output/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom/sequ_all_6_1/ckpt/checkpoint_epoch_12.pth --epochs 30 --extra_tag sequ_all_odom_st_ros_0  ???  lr=0.0005 SCORE_THRESH: [0.6]
+
+pvrcnn
+
+odom:
+bash scripts/dist_train_odom.sh 8 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom.yaml --pretrained ../pretrained/pvrcnn_ros_ckpt.pth --epochs 30 --extra_tag sequ_all_52_100_05_iou  --tcp_port 10002
+
+11.11 12:30
+bash scripts/dist_train_odom.sh 8 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom.yaml --pretrained ../pretrained/pvrcnn_ros_ckpt.pth --batch_size 16 --epochs 30 --extra_tag sequ_all_52_100_05_cls  --tcp_port 10002
+
+11.11 23:35
+no odom
+bash scripts/dist_train_odom.sh 5 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_cls.yaml --pretrained ../pretrained/pvrcnn_ros_ckpt.pth --batch_size 10 --epochs 30 --extra_tag sequ_all_cls --tcp_port 10112
+
+odom with cls
+bash scripts/dist_train_odom.sh 5 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom_cls.yaml --pretrained ../pretrained/pvrcnn_ros_ckpt.pth --batch_size 10 --epochs 30 --extra_tag sequ_all_73_100_05_cls --tcp_port 10112
+
+for waymo
+
+second_iou:
+odom:
+bash scripts/dist_train_odom.sh 8 --cfg_file cfgs/da-waymo-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 32 --pretrained ../pretrained/da-waymo-kitti/ros/secondiou/waymo2kitti_ros_secondiou.pth --epochs 30 --extra_tag sequ_all_waymo_ros  63. --ps_filter_enable --ps_valid_dist 100.0  --ps_decay_factor 0.0
+
+
+bash scripts/dist_test_odom.sh 8 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom.yaml --batch_size 32 --eval_all --extra_tag sequ_all_odom_intv_4_52  --tcp_port 10002
+
+
+
+python -m pcdet.datasets.nuscenes.nuscenes_dataset --func create_nuscenes_infos
+                                                   --cfg_file tools/cfgs/dataset_configs/nuscenes_dataset.yaml
+                                                   --version v1.0-trainval
+
+python pcdet/datasets/nuscenes_odom/nuscenes_odom_dataset.py  --func create_nuscenes_infos --cfg_file tools/cfgs/dataset_configs/nuscenes_odom_dataset.yaml --version v1.0-trainval
+
+python -m pcdet.datasets.nuscenes_odom.nuscenes_odom_dataset  --func create_nuscenes_infos --cfg_file tools/cfgs/dataset_configs/nuscenes_odom_dataset.yaml --version v1.0-trainval
+
+
+python train_odom.py --cfg_file cfgs/da-waymo-nus_models/secondiou_st3d_odom/secondiou_st3d_odom_mini.yaml --batch_size 4 --pretrained ../pretrained/da-waymo-kitti/ros/secondiou/waymo2kitti_ros_secondiou.pth --extra_tag mini_testing
+python train_odom.py --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom_mini.yaml --batch_size 4 --pretrained ../../ST3D/ckpt/ROS.pth --extra_tag testing_gm
+
+pvrcnn on task nuscenes-to-kitti
+
+bash scripts/dist_train_odom.sh 4 --cfg_file cfgs/da-nuscenes-kitti_models/pvrcnn_st3d_odom/pvrcnn_st3d_odom_cls_iou.yaml --batch_size 8 --pretrained ../pretrained/pvrcnn_ros_ckpt.pth --extra_tag t211207_sequ_50_step_2_weight_iou_cls_05_05_intv_2_height_hold_warmup_1 --tcp_port 13232
+
+waymo to nuscenes
+
+bash scripts/dist_train_odom.sh 4 --cfg_file cfgs/da-waymo-nus_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 16 --pretrained ../pretrained/da-waymo-kitti/ros/secondiou/waymo2kitti_ros_secondiou.pth --extra_tag t211208_nus_ori_weighted_iou_cls_intv_4_lr0_001 --tcp_port 11211
+
+bash scripts/dist_test_odom.sh 4 --cfg_file cfgs/da-waymo-nus_models/secondiou_st3d_odom/secondiou_st3d_odom.yaml --batch_size 32 --eval_all --extra_tag nus_ori_weighted_iou_cls_intv_2_height_hold --tcp_port 11211
+
+
+
+test_odom_ps --cfg_file cfgs/da-waymo-nus_models/secondiou_st3d_odom/secondiou_st3d_odom_iou_gm_cyc.yaml --extra_tag t220618_cyc --ps_dir /home/chi_zhang/3d-detection/ST3D_SPC10/output/da-waymo-nus_models/secondiou_st3d_odom/secondiou_st3d_odom_iou_gm_cyc/t220618_cyc/ps_label --ps_epoch 0
+
+ped : {'static_counter': 1576, 'moving_counter': 8977}
