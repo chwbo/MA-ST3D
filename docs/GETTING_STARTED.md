@@ -118,8 +118,7 @@ because the performance of adapted model is really unstable when target domain i
 
 ### Self-training Process
 You need to set the `--pretrained_model ${PRETRAINED_MODEL}` when finish the
-following self-training process. We provide [pretrained model](链接：https://pan.baidu.com/s/1vLdAkS4wU5uqaT4LU8yrfA 
-提取码：b8vl) for Nuscenes -> KITTI task.
+following self-training process. We provide [pretrained model](链接：https://pan.baidu.com/s/1vLdAkS4wU5uqaT4LU8yrfA)(提取码：b8vl) for Nuscenes -> KITTI task.
 ```shell script
 sh scripts/dist_train.sh ${NUM_GPUS} --cfg_file cfgs/da-nuscenes-kitti_models/secondiou_st3d_odom/secondiou_st3d_odom_iou_gm.yaml \
     --batch_size ${BATCH_SIZE} --pretrained_model ${PRETRAINED_MODEL}
