@@ -19,8 +19,9 @@ Unsupervised domain adaptation (UDA) for 3D object detectors has been focused on
 
 | method | Car@R40 | Pedestrian@R40 | Cyclist@R40 | download | 
 |---------------------------------------------|----------:|:-------:|:-------:|:---------:|
-| ST3D | 75.94 / 54.10 |  40.47 / 34.37 |  29.58 / 21.21 |  | 
-| MA-ST3D   | 79.48 / 64.63 |  40.46 / 34.31 |  24.51 / 20.14 | [model](https://drive.google.com/file/d/12f5EwWz2AugC0Ba3NETQG87GqE2C12Xz/view?usp=sharing) |
+| ST3D | 75.94 / 54.10 |  40.47 / 34.37 |  29.58 / 21.21 |  | /
+| MA-ST3D   | 79.48 / 64.63 |  40.46 / 34.31 |  24.51 / 20.14 | [model](链接：https://pan.baidu.com/s/1ilcTu7SgvCBNYUhYmm1Tfg 
+提取码：yjbr) |
 
 
 ## Installation
